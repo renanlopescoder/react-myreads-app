@@ -45,7 +45,10 @@ class App extends React.Component {
       myBooks: oldState.myBooks.concat([book])
     })
     )
-    BooksAPI.update(book, shelf)
+    BooksAPI.update(book, shelf).then(() => { }, (error) => {
+      alert('Sua alteração não pode ser efetuada!')
+      BooksAPI.getAll().then((myBooks) => this.setState({ myBooks }))
+    })
   }
 
   render() {
