@@ -1,4 +1,5 @@
 import React from 'react'
+const shelfs = ['currentlyReading', 'wantToRead' , 'read', 'none']
 
 export default (props) => (
   <li key={props.book.id}>
@@ -11,12 +12,17 @@ export default (props) => (
                 props.updateBook(props.book, event.target.value)
               }
             }>
-          <option value="none" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
-          <option value="rate">Rate</option>
+            <option value="none" disabled>Move to...</option>          
+          {
+            shelfs.map((shelf)=> {
+                if(shelf === 'currentlyReading'){
+                  return <option key={shelf}  value={shelf}>{shelf}</option>
+                }
+
+                return <option key={shelf} selected={shelf === props.book.shelf ? `selected` : ``} value={shelf}>{shelf}</option>
+            })
+          }
+          
         </select>
       </div>
       <div className="book-rate">

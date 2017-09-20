@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Book from './BookComponent'
+import Book from './book.component'
 
 class BooksShelves extends Component {
 
+  
   render () {
     this.props.myBooks.map(
       (book) => {

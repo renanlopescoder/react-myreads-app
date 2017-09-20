@@ -51,11 +51,28 @@ class App extends React.Component {
     })
   }
 
+  map = (books, myBooks) => {
+    books.map((book) => {
+        this.mapSearch(book, myBooks)
+    })
+    this.setState({ books })
+  }
+
+  mapSearch = (book, myBooks) => {
+    myBooks.find(
+      (myBook) => {
+          if(myBook.shelf != 'none' && myBook.shelf != book.shelf && book.id == myBook.id){
+            book.shelf = myBook.shelf
+          }
+        }
+    )
+  }
+
   render() {
     return (
       <div className="app">
         <Route path="/search" render={() => (
-          <SearchBooks books={this.state.books} updateQuery={this.updateQuery} addBook={this.addBook} />
+          <SearchBooks books={this.state.books} myBooks={this.state.myBooks} updateQuery={this.updateQuery} addBook={this.addBook} map={this.map} />
         )}>
         </Route>
         <Route exact path="/" render={() => (
